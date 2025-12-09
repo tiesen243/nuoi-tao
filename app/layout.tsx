@@ -17,17 +17,18 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const title = 'Nuoi Tao'
+const description =
+  'Chương trình nuôi dưỡng, hỗ trợ các bạn học sinh, sinh viên có hoàn cảnh khó khăn vươn lên trong học tập.'
+
 export const metadata: Metadata = {
-  title: 'Nuoi Tao',
-  description:
-    'Chương trình nuôi dưỡng, hỗ trợ các bạn học sinh, sinh viên có hoàn cảnh khó khăn vươn lên trong học tập.',
+  title,
+  description,
   openGraph: {
-    images: '/api/og',
+    images: `https://tiesen.id.vn/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`,
     url: 'https://nuoi-tao.vercel.app',
   },
-  alternates: {
-    canonical: 'https://nuoi-tao.vercel.app',
-  },
+  alternates: { canonical: 'https://nuoi-tao.vercel.app' },
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
