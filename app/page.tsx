@@ -54,7 +54,9 @@ export default function HomePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Tại sao mày nên nuôi Tao?</CardTitle>
+            <CardTitle className='text-2xl'>
+              Tại sao mày nên nuôi Tao?
+            </CardTitle>
             <CardDescription>
               Lợi ích khi trở thành nhà tài trợ chương trình Nuôi Tao
             </CardDescription>
@@ -91,11 +93,12 @@ export default function HomePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Cam kết</CardTitle>
+            <CardTitle className='text-2xl'>Cam kết</CardTitle>
             <CardDescription>
               Đối với các nhà tài trợ của chương trình Nuôi Tao
             </CardDescription>
           </CardHeader>
+
           <CardContent>
             <ul className='list-disc pl-6 space-y-2 text-lg'>
               <li>
@@ -120,7 +123,7 @@ export default function HomePage() {
       </section>
 
       <section className='container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-        <h2 className='col-span-full text-3xl font-bold'>
+        <h2 className='col-span-full text-2xl font-bold'>
           Những người đang cần mày nuôi
         </h2>
 
