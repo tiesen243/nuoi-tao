@@ -1,104 +1,88 @@
 import { Button } from '@/components/ui/button'
 import {
+  Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { DownloadIcon, ExternalLinkIcon } from 'lucide-react'
+import { peoples } from '@/lib/data.json'
 import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className='container py-12'>
-      <div className='flex flex-col items-center gap-4 mb-8'>
-        <h1 className='text-7xl text-center font-black from-chart-5 via-chart-3 to-chart-1 w-fit bg-clip-text text-transparent bg-linear-to-br'>
-          Nuoi Tao
-        </h1>
-        <p>Scan the QR code below to make a payment of 10,000 VND.</p>
-      </div>
+    <main>
+      <h1 className='sr-only'>Nuoi Tao Program</h1>
 
-      <section className='grid md:grid-cols-3 gap-4'>
-        <h2 className='sr-only'>QR Code Section</h2>
+      <section className='flex flex-col items-center gap-4 mb-8 bg-accent text-accent-foreground py-24'>
+        <h2 className='text-7xl text-center font-black from-chart-5 via-chart-4 to-chart-2 w-fit bg-clip-text text-transparent bg-linear-to-br'>
+          Nuôi Tao
+        </h2>
 
-        <section className='flex flex-col items-center gap-4'>
-          <h3 className='sr-only'>QR Code Instruction Section</h3>
+        <p className='max-w-2xl text-center text-lg'>
+          Chương trình nuôi dưỡng, hỗ trợ các bạn học sinh, sinh viên có hoàn
+          cảnh khó khăn vươn lên trong học tập.
+        </p>
 
-          <div className='relative w-1/2 aspect-square border border-accent rounded-lg shadow-sm'>
-            <Image
-              src='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN&amount=10000'
-              alt='QR Code'
-              sizes='(max-width: 768px) 50vw, 100vw'
-              className='object-cover rounded-xl mx-auto'
-              fill
-            />
-          </div>
+        <div className='flex flex-col sm:flex-row gap-4 mt-4'>
+          <Button size='lg' asChild>
+            <Link href='/nuoi'>Trở thành nhà tài trợ</Link>
+          </Button>
+          <Button size='lg' variant='secondary' asChild>
+            <Link href='#about'>Tìm hiểu thêm</Link>
+          </Button>
+        </div>
 
-          <CardTitle className='text-center text-lg'>
-            Scan this QR code with your banking app to proceed with the payment.
-          </CardTitle>
+        <div className='max-w-3xl mt-8 text-center text-base text-muted-foreground'>
+          <p>
+            Nuôi Tao kết nối những nhà hảo tâm với các bạn học sinh, sinh viên
+            tài năng đang gặp khó khăn về tài chính. Cùng nhau, chúng ta trao
+            quyền cho thế hệ trẻ thực hiện ước mơ học tập và xây dựng tương lai
+            tươi sáng hơn.
+          </p>
+          <p className='mt-2'>
+            Hãy đồng hành cùng chúng tôi để tạo nên sự khác biệt - mỗi đóng góp
+            đều giúp mở ra tiềm năng và thay đổi cuộc đời.
+          </p>
+        </div>
+      </section>
 
-          <div className='grid grid-cols-2 gap-4'>
-            <Button size='sm'>
-              <ExternalLinkIcon /> Open in Banking App
-            </Button>
-            <Button variant='outline' size='sm' asChild>
-              <a
-                href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN&amount=10000'
-                download='NuoiTao_QR_Code.png'
-              >
-                <DownloadIcon /> Download QR Code
-              </a>
-            </Button>
-          </div>
-        </section>
+      <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 container py-12'>
+        {peoples.map((person) => (
+          <Card key={person.id}>
+            <CardHeader className='flex flex-col gap-4 items-center'>
+              <CardTitle className='font-serif'>Nuoi Tao</CardTitle>
+              <CardDescription>
+                Nam hoc {new Date().getFullYear()} -{' '}
+                {new Date().getFullYear() + 1}
+              </CardDescription>
+              <Image
+                src={person.image}
+                alt={`Portrait of ${person.name}`}
+                width={200}
+                height={200}
+                className='rounded-full object-cover ring-2 ring-ring ring-offset-2 ring-offset-card'
+              />
+            </CardHeader>
 
-        <section className='bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm md:col-span-2'>
-          <h2 className='sr-only'>Payment Details Section</h2>
+            <CardContent className='flex flex-col gap-2 items-center'>
+              <p className='font-medium text-lg'>{person.id}</p>
+              <p className='font-serif text-4xl font-bold'>{person.name}</p>
+              <p className='text-xl text-muted-foreground'>
+                {person.situation}
+              </p>
+            </CardContent>
 
-          <CardHeader className='relative h-24'>
-            <Image
-              src='/assets/logo-vietinbank-insacmau.png'
-              alt='VietinBank Logo'
-              className='object-contain object-left px-6'
-              fill
-            />
-          </CardHeader>
-          <CardContent className='flex-1'>
-            {Object.entries(paymentDetails).map(([key, value]) => (
-              <div
-                key={key}
-                className='flex justify-between border-b py-2 last:border-0 last:pb-0'
-              >
-                <span className='font-medium capitalize'>
-                  {key.replace(/([A-Z])/g, ' $1')}
-                </span>
-                <span className='font-mono'>
-                  {key === 'amount'
-                    ? new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'VND',
-                      }).format(Number(value))
-                    : value}
-                </span>
-              </div>
-            ))}
-          </CardContent>
-
-          <CardFooter className='flex justify-between border-t'>
-            <span className='font-semibold text-chart-12'>Amount</span>
-            <span className='font-mono font-bold text-chart-12'>
-              10,000 VND
-            </span>
-          </CardFooter>
-        </section>
+            <CardFooter>
+              <Button className='w-full' asChild>
+                <Link href='/nuoi'>Nuôi</Link>
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
       </section>
     </main>
   )
-}
-
-const paymentDetails = {
-  accountName: 'TRAN TIEN',
-  accountNumber: '109876529294',
-  content: 'SEVQR TKPYKN',
 }
