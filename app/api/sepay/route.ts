@@ -15,13 +15,22 @@ const client = createClient({
   },
 })
 
+let redisConnected = false
+async function ensureRedisConnected() {
+  if (!redisConnected) {
+    await client.connect()
+    redisConnected = true
+  }
+}
+
 export const GET = async (req: NextRequest) => {
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
   if (apiKey !== process.env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  await client.connect()
+  await ensureRedisConnected()
+
   const res = await client.lRange('sepay_history', 0, -1)
   const history = res.map((item) => JSON.parse(item))
 
@@ -40,7 +49,7 @@ export const POST = async (req: NextRequest) => {
   if (apiKey !== process.env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  await client.connect()
+  await ensureRedisConnected()
 
   const body = (await req.json()) as SepayTransaction
   console.log('Received Sepay transaction:', body)
