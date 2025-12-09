@@ -32,19 +32,14 @@ export default function NuoiPage() {
           toán.
         </CardTitle>
 
-        <div className='grid grid-cols-2 gap-4'>
-          <Button size='sm'>
-            <ExternalLinkIcon /> Mở trong ứng dụng ngân hàng
-          </Button>
-          <Button variant='outline' size='sm' asChild>
-            <a
-              href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN'
-              download='NuoiTao_QR_Code.png'
-            >
-              <DownloadIcon /> Tải mã QR
-            </a>
-          </Button>
-        </div>
+        <Button variant='outline' size='sm' asChild>
+          <a
+            href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN'
+            download='NuoiTao_QR_Code.png'
+          >
+            <DownloadIcon /> Tải mã QR
+          </a>
+        </Button>
       </section>
 
       <section className='bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm md:col-span-2'>
