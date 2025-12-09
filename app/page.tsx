@@ -49,7 +49,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='container bg-card p-6 rounded-xl shadow-sm dark:border'>
+      <section className='container bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm'>
         <h2 className='text-3xl font-bold mb-4'>Tại sao mày nên nuôi Tao?</h2>
         <ul className='list-disc pl-6 space-y-2 text-lg'>
           <li>
@@ -74,7 +74,7 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className='container bg-card p-6 rounded-xl shadow-sm dark:border'>
+      <section className='container bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm'>
         <h2 className='text-3xl font-bold mb-4'>Cam kết</h2>
         <ul className='list-disc pl-6 space-y-2 text-lg'>
           <li>
@@ -97,7 +97,7 @@ export default function HomePage() {
 
       <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 container'>
         <h2 className='col-span-full text-3xl font-bold'>
-          Những người bạn đang cần nuôi
+          Những đang cần mày nuôi
         </h2>
 
         {peoples.map((person) => (
