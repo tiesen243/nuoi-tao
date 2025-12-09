@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 export const POST = async (req: NextRequest) => {
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
-  if (apiKey !== process.env.SEPAY_API_KEY)
+  if (apiKey !== process.env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
   const body = (await req.json()) as SepayTransaction
