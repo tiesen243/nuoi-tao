@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-const title = 'Nuoi Tao'
+const title = 'Nuôi Tao'
 const description =
   'Chương trình nuôi dưỡng, hỗ trợ các bạn học sinh, sinh viên có hoàn cảnh khó khăn vươn lên trong học tập.'
 
