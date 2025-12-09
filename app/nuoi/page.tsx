@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { DownloadIcon, ExternalLinkIcon } from 'lucide-react'
+import { DownloadIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
