@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
+import { Suspense } from 'react'
+import { Footer, FooterFallback } from '@/components/footer'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,10 +42,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       >
         {children}
 
-        <footer className='w-full border-t py-6 mt-auto bg-background text-muted-foreground text-center text-sm'>
-          © {new Date().getFullYear()} Nuôi Tao. Được xây dựng với {'<'}4 tại
-          Việt Nam.
-        </footer>
+        <Suspense fallback={<FooterFallback />}>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   )

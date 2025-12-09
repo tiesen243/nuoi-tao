@@ -13,10 +13,10 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <main>
+    <main className='flex flex-col gap-16 pb-16'>
       <h1 className='sr-only'>Nuoi Tao Program</h1>
 
-      <section className='flex flex-col items-center gap-4 mb-8 bg-accent text-accent-foreground py-24 px-4'>
+      <section className='flex flex-col items-center gap-4 bg-accent text-accent-foreground py-24 px-4'>
         <h2 className='text-7xl text-center font-black from-chart-5 via-chart-4 to-chart-2 w-fit bg-clip-text text-transparent bg-linear-to-br'>
           Nuôi Tao
         </h2>
@@ -31,7 +31,7 @@ export default function HomePage() {
             <Link href='/nuoi'>Trở thành nhà tài trợ</Link>
           </Button>
           <Button size='lg' variant='secondary' asChild>
-            <Link href='#about'>Tìm hiểu thêm</Link>
+            <Link href='/sao-ke'>Xem sao kê</Link>
           </Button>
         </div>
 
@@ -49,15 +49,62 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 container py-12'>
+      <section className='container bg-card p-6 rounded-xl shadow-sm dark:border'>
+        <h2 className='text-3xl font-bold mb-4'>Tại sao mày nên nuôi Tao?</h2>
+        <ul className='list-disc pl-6 space-y-2 text-lg'>
+          <li>
+            Đồng hành cùng các bạn học sinh, sinh viên vượt qua khó khăn để tiếp
+            tục học tập và phát triển bản thân.
+          </li>
+          <li>
+            Đóng góp của bạn sẽ được sử dụng minh bạch, cập nhật công khai từng
+            khoản hỗ trợ.
+          </li>
+          <li>
+            Góp phần xây dựng một cộng đồng nhân ái, lan tỏa giá trị tốt đẹp
+            trong xã hội.
+          </li>
+          <li>
+            Kết nối trực tiếp với những hoàn cảnh thực sự cần giúp đỡ, tạo động
+            lực cho thế hệ trẻ vươn lên.
+          </li>
+          <li>
+            Mỗi sự đóng góp đều là một cơ hội thay đổi cuộc đời cho các bạn trẻ.
+          </li>
+        </ul>
+      </section>
+
+      <section className='container bg-card p-6 rounded-xl shadow-sm dark:border'>
+        <h2 className='text-3xl font-bold mb-4'>Cam kết</h2>
+        <ul className='list-disc pl-6 space-y-2 text-lg'>
+          <li>
+            Mọi khoản đóng góp đều được sử dụng minh bạch, công khai và đúng mục
+            đích hỗ trợ các bạn học sinh, sinh viên khó khăn.
+          </li>
+          <li>
+            Thông tin về quá trình hỗ trợ, kết quả và sao kê sẽ được cập nhật
+            thường xuyên để đảm bảo sự tin tưởng từ cộng đồng.
+          </li>
+          <li>
+            Cam kết bảo vệ quyền riêng tư và tôn trọng các bạn nhận hỗ trợ.
+          </li>
+          <li>
+            Đội ngũ chương trình luôn sẵn sàng lắng nghe, tiếp nhận ý kiến đóng
+            góp để hoàn thiện và phát triển hoạt động.
+          </li>
+        </ul>
+      </section>
+
+      <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 container'>
+        <h2 className='col-span-full text-3xl font-bold'>
+          Những người bạn đang cần nuôi
+        </h2>
+
         {peoples.map((person) => (
           <Card key={person.id}>
             <CardHeader className='flex flex-col gap-4 items-center'>
               <CardTitle className='font-serif'>Nuoi Tao</CardTitle>
-              <CardDescription>
-                Nam hoc {new Date().getFullYear()} -{' '}
-                {new Date().getFullYear() + 1}
-              </CardDescription>
+              <CardDescription>Nam hoc 2025 - 2026</CardDescription>
               <Image
                 src={person.image}
                 alt={`Portrait of ${person.name}`}

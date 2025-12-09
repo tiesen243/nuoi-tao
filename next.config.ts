@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig = {
+  cacheComponents: true,
   reactStrictMode: true,
   images: { unoptimized: true },
   typescript: { ignoreBuildErrors: true },
