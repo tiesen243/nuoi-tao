@@ -49,61 +49,85 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='container bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm'>
-        <h2 className='text-3xl font-bold mb-4'>Tại sao mày nên nuôi Tao?</h2>
-        <ul className='list-disc pl-6 space-y-2 text-lg'>
-          <li>
-            Đồng hành cùng các bạn học sinh, sinh viên vượt qua khó khăn để tiếp
-            tục học tập và phát triển bản thân.
-          </li>
-          <li>
-            Đóng góp của bạn sẽ được sử dụng minh bạch, cập nhật công khai từng
-            khoản hỗ trợ.
-          </li>
-          <li>
-            Góp phần xây dựng một cộng đồng nhân ái, lan tỏa giá trị tốt đẹp
-            trong xã hội.
-          </li>
-          <li>
-            Kết nối trực tiếp với những hoàn cảnh thực sự cần giúp đỡ, tạo động
-            lực cho thế hệ trẻ vươn lên.
-          </li>
-          <li>
-            Mỗi sự đóng góp đều là một cơ hội thay đổi cuộc đời cho các bạn trẻ.
-          </li>
-        </ul>
+      <section className='container'>
+        <h2 className='sr-only'>Why you should become a sponsor section</h2>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Tại sao mày nên nuôi Tao?</CardTitle>
+            <CardDescription>
+              Lợi ích khi trở thành nhà tài trợ chương trình Nuôi Tao
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent>
+            <ul className='list-disc pl-6 space-y-2 text-lg'>
+              <li>
+                Đồng hành cùng tao vượt qua khó khăn để tiếp tục học tập và phát
+                triển bản thân.
+              </li>
+              <li>
+                Đóng góp của mày sẽ được sử dụng minh bạch, cập nhật công khai
+                từng khoản hỗ trợ.
+              </li>
+              <li>
+                Góp phần xây dựng một cộng đồng nhân ái, lan tỏa giá trị tốt đẹp
+                trong xã hội.
+              </li>
+              <li>
+                Kết nối trực tiếp với những hoàn cảnh thực sự cần giúp đỡ, tạo
+                động lực cho tao vươn lên.
+              </li>
+              <li>
+                Mỗi sự đóng góp đều là một cơ hội thay đổi cuộc đời cho tao.
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
       </section>
 
-      <section className='container bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm'>
-        <h2 className='text-3xl font-bold mb-4'>Cam kết</h2>
-        <ul className='list-disc pl-6 space-y-2 text-lg'>
-          <li>
-            Mọi khoản đóng góp đều được sử dụng minh bạch, công khai và đúng mục
-            đích hỗ trợ các bạn học sinh, sinh viên khó khăn.
-          </li>
-          <li>
-            Thông tin về quá trình hỗ trợ, kết quả và sao kê sẽ được cập nhật
-            thường xuyên để đảm bảo sự tin tưởng từ cộng đồng.
-          </li>
-          <li>
-            Cam kết bảo vệ quyền riêng tư và tôn trọng các bạn nhận hỗ trợ.
-          </li>
-          <li>
-            Đội ngũ chương trình luôn sẵn sàng lắng nghe, tiếp nhận ý kiến đóng
-            góp để hoàn thiện và phát triển hoạt động.
-          </li>
-        </ul>
+      <section className='container'>
+        <h2 className='sr-only'>Our commitments to sponsors section</h2>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Cam kết</CardTitle>
+            <CardDescription>
+              Đối với các nhà tài trợ của chương trình Nuôi Tao
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className='list-disc pl-6 space-y-2 text-lg'>
+              <li>
+                Mọi khoản đóng góp đều được sử dụng minh bạch, công khai và đúng
+                mục đích hỗ trợ tao.
+              </li>
+              <li>
+                Thông tin về quá trình hỗ trợ, kết quả và sao kê sẽ được cập
+                nhật thường xuyên để đảm bảo sự tin tưởng từ cộng đồng.
+              </li>
+              <li>
+                Cam kết bảo vệ quyền riêng tư và tôn trọng thông tin cá nhân của
+                tụi mày.
+              </li>
+              <li>
+                Đội ngũ chương trình luôn đéo lắng nghe, tiếp nhận ý kiến đóng
+                góp để hoàn thiện và phát triển hoạt động.
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
       </section>
 
-      <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 container'>
+      <section className='container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
         <h2 className='col-span-full text-3xl font-bold'>
-          Những đang cần mày nuôi
+          Những người đang cần mày nuôi
         </h2>
 
         {peoples.map((person) => (
           <Card key={person.id}>
             <CardHeader className='flex flex-col gap-4 items-center'>
-              <CardTitle className='font-serif'>Nuoi Tao</CardTitle>
+              <CardTitle className='font-serif'>Nuôi Tao</CardTitle>
               <CardDescription>Nam hoc 2025 - 2026</CardDescription>
               <Image
                 src={person.image}
