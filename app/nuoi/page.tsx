@@ -37,7 +37,7 @@ export default function NuoiPage() {
           </Button>
           <Button variant='outline' size='sm' asChild>
             <a
-              href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN&amount=10000'
+              href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN'
               download='NuoiTao_QR_Code.png'
             >
               <DownloadIcon /> Download QR Code
