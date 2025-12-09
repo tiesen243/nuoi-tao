@@ -16,7 +16,7 @@ export default function HomePage() {
     <main>
       <h1 className='sr-only'>Nuoi Tao Program</h1>
 
-      <section className='flex flex-col items-center gap-4 mb-8 bg-accent text-accent-foreground py-24'>
+      <section className='flex flex-col items-center gap-4 mb-8 bg-accent text-accent-foreground py-24 px-4'>
         <h2 className='text-7xl text-center font-black from-chart-5 via-chart-4 to-chart-2 w-fit bg-clip-text text-transparent bg-linear-to-br'>
           Nuôi Tao
         </h2>
