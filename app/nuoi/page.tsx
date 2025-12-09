@@ -51,7 +51,7 @@ export default function NuoiPage() {
 
         <CardHeader className='relative h-24'>
           <Image
-            src='/assets/logo-vietinbank-insacmau.png'
+            src='/assets/images/logo-vietinbank-insacmau.png'
             alt='VietinBank Logo'
             className='object-contain object-left px-6'
             fill
