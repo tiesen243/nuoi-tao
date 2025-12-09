@@ -22,13 +22,14 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
   await client.connect()
-  const history = await client.lRange('sepay_history', 0, -1)
+  const res = await client.lRange('sepay_history', 0, -1)
+  const history = res.map((item) => JSON.parse(item))
 
-  history.sort((a, b) => {
-    const dateA = new Date(JSON.parse(a).transactionDate).getTime()
-    const dateB = new Date(JSON.parse(b).transactionDate).getTime()
-    return dateB - dateA
-  })
+  history.sort(
+    (a, b) =>
+      new Date(b.transactionDate).getTime() -
+      new Date(a.transactionDate).getTime(),
+  )
 
   return NextResponse.json({ history }, { status: 200 })
 }

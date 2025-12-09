@@ -13,7 +13,9 @@ export interface SepayTransaction {
   description: string
 }
 
-export const history: Pick<
+export type history = Pick<
   SepayTransaction,
   'id' | 'gateway' | 'accountNumber' | 'transferAmount' | 'transactionDate'
->[] = []
+>[]
+
+export const history: history = []

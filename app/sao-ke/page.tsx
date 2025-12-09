@@ -1,3 +1,4 @@
+import type { history } from '@/app/api/sepay/route.data'
 import {
   Table,
   TableBody,
@@ -22,15 +23,7 @@ export default async function SaoKePage() {
   })
   if (!res.ok) return <div>Lỗi tải lịch sử giao dịch</div>
 
-  const data = (await res.json()) as {
-    history: {
-      id: number
-      gateway: string
-      accountNumber: string
-      transferAmount: number
-      transactionDate: string
-    }[]
-  }
+  const data = (await res.json()) as { history: history }
 
   return (
     <main className='container py-4'>
