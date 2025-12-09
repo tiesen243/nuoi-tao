@@ -12,10 +12,10 @@ import {
 export default function NuoiPage() {
   return (
     <main className='container grid md:grid-cols-3 gap-8 md:gap-4 py-24'>
-      <h1 className='sr-only'>Nuoi Tao Payment Page</h1>
+      <h1 className='sr-only'>Trang Thanh Toán Nuôi Tao</h1>
 
       <section className='flex flex-col items-center gap-4'>
-        <h2 className='sr-only'>QR Code Instruction Section</h2>
+        <h2 className='sr-only'>Phần Hướng Dẫn Quét Mã QR</h2>
 
         <div className='relative w-1/2 aspect-square border border-accent rounded-lg shadow-sm'>
           <Image
@@ -28,26 +28,27 @@ export default function NuoiPage() {
         </div>
 
         <CardTitle className='text-center text-lg'>
-          Scan this QR code with your banking app to proceed with the payment.
+          Quét mã QR này bằng ứng dụng ngân hàng của bạn để tiến hành thanh
+          toán.
         </CardTitle>
 
         <div className='grid grid-cols-2 gap-4'>
           <Button size='sm'>
-            <ExternalLinkIcon /> Open in Banking App
+            <ExternalLinkIcon /> Mở trong ứng dụng ngân hàng
           </Button>
           <Button variant='outline' size='sm' asChild>
             <a
               href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN'
               download='NuoiTao_QR_Code.png'
             >
-              <DownloadIcon /> Download QR Code
+              <DownloadIcon /> Tải mã QR
             </a>
           </Button>
         </div>
       </section>
 
       <section className='bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm md:col-span-2'>
-        <h2 className='sr-only'>Payment Details Section</h2>
+        <h2 className='sr-only'>Phần Chi Tiết Thanh Toán</h2>
 
         <CardHeader className='relative h-24'>
           <Image
@@ -80,7 +81,7 @@ export default function NuoiPage() {
 
         <CardFooter className='flex justify-between border-t'>
           <span className='font-semibold text-chart-12'>Amount</span>
-          <span className='font-mono font-bold text-chart-12'>10,000 VND</span>
+          <span className='font-mono font-bold text-chart-12'>Tùy tâm</span>
         </CardFooter>
       </section>
     </main>
