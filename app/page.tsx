@@ -24,8 +24,9 @@ export default function HomePage() {
         </h2>
 
         <p className='max-w-2xl text-center text-lg drop-shadow-xl'>
-          Chương trình nuôi dưỡng, hỗ trợ các bạn học sinh, sinh viên có hoàn
-          cảnh khó khăn vươn lên trong học tập.
+          Chương trình nuôi tao là một sáng kiến nhằm kết nối những người muốn
+          hỗ trợ tài chính tới tao - người đang gặp khó khăn về kinh tế trong
+          việc tiếp tục học tập và phát triển bản thân.
         </p>
 
         <div className='flex flex-col sm:flex-row gap-4 mt-4'>
