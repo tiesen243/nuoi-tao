@@ -55,11 +55,8 @@ export default function HomePage() {
         <Card>
           <CardHeader>
             <CardTitle className='text-2xl'>
-              Tại sao mày nên nuôi Tao?
+              Tại sao mày nên nuôi tao?
             </CardTitle>
-            <CardDescription>
-              Lợi ích khi trở thành nhà tài trợ chương trình Nuôi Tao
-            </CardDescription>
           </CardHeader>
 
           <CardContent>
@@ -94,9 +91,6 @@ export default function HomePage() {
         <Card>
           <CardHeader>
             <CardTitle className='text-2xl'>Cam kết</CardTitle>
-            <CardDescription>
-              Đối với các nhà tài trợ của chương trình Nuôi Tao
-            </CardDescription>
           </CardHeader>
 
           <CardContent>
@@ -124,7 +118,7 @@ export default function HomePage() {
 
       <section className='container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
         <h2 className='col-span-full text-2xl font-bold'>
-          Những người đang cần mày nuôi
+          Những thằng đang cần mày nuôi
         </h2>
 
         {peoples.map((person) => (

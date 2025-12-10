@@ -54,7 +54,7 @@ export default function NuoiPage() {
           />
         </CardHeader>
         <CardContent className='flex-1'>
-          {Object.entries(paymentDetails).map(([key, value]) => (
+          {paymentDetails.map(({ key, value }) => (
             <div
               key={key}
               className='flex justify-between border-b py-2 last:border-0 last:pb-0'
@@ -75,7 +75,9 @@ export default function NuoiPage() {
         </CardContent>
 
         <CardFooter className='flex justify-between border-t'>
-          <span className='font-semibold text-chart-12'>Amount</span>
+          <span className='font-semibold text-chart-12'>
+            Số tiền đề xuất đóng góp:
+          </span>
           <span className='font-mono font-bold text-chart-12'>Tùy tâm</span>
         </CardFooter>
       </section>
@@ -83,8 +85,14 @@ export default function NuoiPage() {
   )
 }
 
-const paymentDetails = {
-  accountName: 'TRAN TIEN',
-  accountNumber: '109876529294',
-  content: 'SEVQR TKPYKN',
-}
+const paymentDetails = [
+  {
+    key: 'Chủ tài khoản',
+    value: 'TRAN TIEN',
+  },
+  { key: 'Số tài khoản', value: '109876529294' },
+  {
+    key: 'Nội dung chuyển khoản',
+    value: 'SEVQR TKPYKN',
+  },
+]
