@@ -26,7 +26,7 @@ export default async function SaoKePage() {
   const data = (await res.json()) as { history: history }
 
   return (
-    <main className='container py-4'>
+    <main className='flex-1 container py-4'>
       <h1 className='text-3xl font-bold'>Sao kê giao dịch</h1>
 
       <section className='bg-card p-6 text-card-foreground rounded-xl mt-6 shadow-sm dark:border'>

@@ -11,7 +11,7 @@ import {
 
 export default function NuoiPage() {
   return (
-    <main className='container grid md:grid-cols-3 gap-8 md:gap-4 py-24'>
+    <main className='flex-1 container grid md:grid-cols-3 gap-8 md:gap-4 py-24'>
       <h1 className='sr-only'>Trang Thanh Toán Nuôi Tao</h1>
 
       <section className='flex flex-col items-center gap-4'>
@@ -76,7 +76,7 @@ export default function NuoiPage() {
 
         <CardFooter className='flex justify-between border-t'>
           <span className='font-semibold text-chart-12'>
-            Số tiền đề xuất đóng góp:
+            Số tiền đề xuất đóng góp
           </span>
           <span className='font-mono font-bold text-chart-12'>Tùy tâm</span>
         </CardFooter>
