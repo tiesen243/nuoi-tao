@@ -32,7 +32,7 @@ export default async function SaoKePage() {
       <section className='bg-card p-6 text-card-foreground rounded-xl mt-6 shadow-sm dark:border'>
         <h2 className='sr-only'>Transaction History section</h2>
 
-        <Table className='w-full mt-4 table-auto border-collapse border'>
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Mã giao dịch</TableHead>
