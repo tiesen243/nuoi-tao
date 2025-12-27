@@ -1,6 +1,6 @@
+import { ChevronRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronRightIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -30,13 +30,16 @@ export default function HomePage() {
         </p>
 
         <div className='flex flex-col sm:flex-row gap-4 mt-4'>
-          <Button size='lg' asChild>
-            <Link href='/nuoi'>
-              Trở thành nhà tài trợ <ChevronRightIcon />
-            </Link>
+          <Button size='lg' nativeButton={false} render={<Link href='/nuoi' />}>
+            Trở thành nhà tài trợ <ChevronRightIcon />
           </Button>
-          <Button size='lg' variant='secondary' asChild>
-            <Link href='/sao-ke'>Xem sao kê</Link>
+          <Button
+            size='lg'
+            variant='secondary'
+            nativeButton={false}
+            render={<Link href='/sao-ke' />}
+          >
+            Xem sao kê
           </Button>
         </div>
       </section>
@@ -125,8 +128,8 @@ export default function HomePage() {
             </CardContent>
 
             <CardFooter>
-              <Button className='w-full' asChild>
-                <Link href='/nuoi'>Nuôi</Link>
+              <Button className='w-full' render={<Link href='/nuoi' />}>
+                Nuôi
               </Button>
             </CardFooter>
           </Card>

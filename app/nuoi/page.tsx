@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import { DownloadIcon } from 'lucide-react'
+import Image from 'next/image'
+import { useMemo } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -10,6 +11,21 @@ import {
 } from '@/components/ui/card'
 
 export default function NuoiPage() {
+  const qrUrl = useMemo(() => {
+    const acc = encodeURIComponent(
+      paymentDetails.find((item) => item.key === 'Số tài khoản')?.value ?? '',
+    )
+    const bank = encodeURIComponent(
+      paymentDetails.find((item) => item.key === 'Ngân hàng')?.value ?? '',
+    )
+    const des = encodeURIComponent(
+      paymentDetails.find((item) => item.key === 'Nội dung chuyển khoản')
+        ?.value ?? '',
+    )
+
+    return `https://qr.sepay.vn/img?acc=${acc}&bank=${bank}&des=${des}`
+  }, [paymentDetails])
+
   return (
     <main className='flex-1 container grid md:grid-cols-3 gap-8 md:gap-4 py-24'>
       <h1 className='sr-only'>Trang Thanh Toán Nuôi Tao</h1>
@@ -19,7 +35,7 @@ export default function NuoiPage() {
 
         <div className='relative w-1/2 aspect-square border border-accent rounded-lg shadow-sm'>
           <Image
-            src='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN&amount=10000'
+            src={qrUrl}
             alt='QR Code'
             sizes='(max-width: 768px) 50vw, 100vw'
             className='object-cover rounded-xl mx-auto'
@@ -32,13 +48,13 @@ export default function NuoiPage() {
           toán.
         </CardTitle>
 
-        <Button variant='outline' size='sm' asChild>
-          <a
-            href='https://qr.sepay.vn/img?acc=109876529294&bank=VietinBank&des=SEVQR+TKPYKN'
-            download='NuoiTao_QR_Code.png'
-          >
-            <DownloadIcon /> Tải mã QR
-          </a>
+        <Button
+          variant='outline'
+          size='sm'
+          nativeButton={false}
+          render={<a href={qrUrl} download='NuoiTao_QR_Code.png' />}
+        >
+          <DownloadIcon /> Tải mã QR
         </Button>
       </section>
 
@@ -62,14 +78,7 @@ export default function NuoiPage() {
               <span className='font-medium capitalize'>
                 {key.replace(/([A-Z])/g, ' $1')}
               </span>
-              <span className='font-mono'>
-                {key === 'amount'
-                  ? new Intl.NumberFormat('en-US', {
-                      style: 'currency',
-                      currency: 'VND',
-                    }).format(Number(value))
-                  : value}
-              </span>
+              <span className='font-mono'>{value}</span>
             </div>
           ))}
         </CardContent>
@@ -86,13 +95,8 @@ export default function NuoiPage() {
 }
 
 const paymentDetails = [
-  {
-    key: 'Chủ tài khoản',
-    value: 'TRAN TIEN',
-  },
+  { key: 'Ngân hàng', value: 'VietinBank' },
+  { key: 'Chủ tài khoản', value: 'TRAN TIEN' },
   { key: 'Số tài khoản', value: '109876529294' },
-  {
-    key: 'Nội dung chuyển khoản',
-    value: 'SEVQR TKPYKN',
-  },
-]
+  { key: 'Nội dung chuyển khoản', value: 'SEVQR TKPYKN' },
+] as const

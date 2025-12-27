@@ -1,9 +1,8 @@
+import type { SepayTransaction } from '@/app/api/sepay/route.data'
 import type { NextRequest } from 'next/server'
+
 import { revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
-
-import type { SepayTransaction } from '@/app/api/sepay/route.data'
-
 import { createClient } from 'redis'
 
 const client = createClient({

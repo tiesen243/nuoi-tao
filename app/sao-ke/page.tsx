@@ -1,4 +1,7 @@
 import type { history } from '@/app/api/sepay/route.data'
+
+import { cacheTag } from 'next/cache'
+
 import {
   Table,
   TableBody,
@@ -8,7 +11,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { getBaseUrl } from '@/lib/utils'
-import { cacheTag } from 'next/cache'
 
 export default async function SaoKePage() {
   'use cache'
