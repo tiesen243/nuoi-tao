@@ -70,11 +70,13 @@ export default function HomePage() {
           {why.map((item, idx) => (
             <Card
               key={idx}
-              className='p-6 space-y-3 bg-accent/10 border-accent hover:bg-accent/20 transition-colors shadow-accent'
+              className='hover:bg-accent/20 hover:ring-accent transition-colors'
             >
-              <item.icon className='w-8 h-8 text-primary' />
-              <h3 className='font-semibold text-foreground'>{item.title}</h3>
-              <p className='text-sm text-foreground/70'>{item.description}</p>
+              <CardHeader>
+                <item.icon className='w-8 h-8 text-primary' />
+                <h3 className='font-semibold text-foreground'>{item.title}</h3>
+                <p className='text-sm text-foreground/70'>{item.description}</p>
+              </CardHeader>
             </Card>
           ))}
         </section>
@@ -105,24 +107,26 @@ export default function HomePage() {
         {peoples.map((person) => (
           <Card
             key={person.id}
-            className='hover:bg-accent/10 hover:border-accent transition-colors'
+            className='hover:bg-accent/20 hover:ring-accent transition-colors'
           >
-            <CardHeader className='flex flex-col gap-4 items-center'>
-              <CardTitle className='font-serif'>Nuôi Tao</CardTitle>
+            <CardHeader className='flex flex-col gap-2 items-center'>
+              <CardTitle className='font-serif text-primary font-bold'>
+                Nuôi Tao
+              </CardTitle>
               <CardDescription>Năm học 2025 - 2026</CardDescription>
               <Image
                 src={person.image}
                 alt={`Portrait of ${person.name}`}
                 width={200}
                 height={200}
-                className='rounded-full object-cover ring-2 ring-ring ring-offset-2 ring-offset-card'
+                className='rounded-full object-cover ring-2 mt-2 ring-ring ring-offset-2 ring-offset-card'
               />
             </CardHeader>
 
             <CardContent className='flex flex-col gap-2 items-center'>
-              <p className='font-medium text-lg'>{person.id}</p>
-              <p className='font-serif text-4xl font-bold'>{person.name}</p>
-              <p className='text-xl text-muted-foreground'>
+              <p className='font-medium'>{person.id}</p>
+              <p className='font-serif text-2xl font-bold'>{person.name}</p>
+              <p className='text-lg text-muted-foreground'>
                 {person.situation}
               </p>
             </CardContent>

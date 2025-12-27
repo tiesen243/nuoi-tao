@@ -3,12 +3,7 @@ import Image from 'next/image'
 import { useMemo } from 'react'
 
 import { Button } from '@/components/ui/button'
-import {
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function NuoiPage() {
   const qrUrl = useMemo(() => {
@@ -58,18 +53,19 @@ export default function NuoiPage() {
         </Button>
       </section>
 
-      <section className='bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm md:col-span-2'>
+      <section className='ring-foreground/10 md:col-span-2 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
         <h2 className='sr-only'>Phần Chi Tiết Thanh Toán</h2>
 
-        <CardHeader className='relative h-24'>
+        <div className='w-1/3 mx-4 relative aspect-3/1'>
           <Image
             src='/assets/images/logo-vietinbank-insacmau.png'
             alt='VietinBank Logo'
-            className='object-contain object-left px-6'
+            className='object-cover object-left'
             fill
           />
-        </CardHeader>
-        <CardContent className='flex-1'>
+        </div>
+
+        <CardHeader className='flex-1'>
           {paymentDetails.map(({ key, value }) => (
             <div
               key={key}
@@ -81,13 +77,13 @@ export default function NuoiPage() {
               <span className='font-mono'>{value}</span>
             </div>
           ))}
-        </CardContent>
+        </CardHeader>
 
         <CardFooter className='flex justify-between border-t'>
-          <span className='font-semibold text-chart-12'>
-            Số tiền đề xuất đóng góp
+          <span className='font-semibold'>Số tiền đề xuất đóng góp</span>
+          <span className='font-mono font-bold text-primary dark:brightness-125'>
+            Tùy tâm
           </span>
-          <span className='font-mono font-bold text-chart-12'>Tùy tâm</span>
         </CardFooter>
       </section>
     </main>

@@ -3,7 +3,7 @@ import '@/app/globals.css'
 import type { Metadata } from 'next'
 
 import { ThemeProvider } from 'next-themes'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Merriweather } from 'next/font/google'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
@@ -15,6 +15,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
+
+const merriweather = Merriweather({
+  variable: '--font-merriweather',
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 })
 
@@ -40,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           'font-sans antialiased min-h-dvh flex flex-col',
           geistSans.variable,
           geistMono.variable,
+          merriweather.variable,
         )}
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
