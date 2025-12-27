@@ -1,6 +1,6 @@
 import type { history } from '@/app/api/sepay/route.data'
 
-import { cacheTag } from 'next/cache'
+import { cacheLife, cacheTag } from 'next/cache'
 
 import {
   Table,
@@ -15,6 +15,11 @@ import { getBaseUrl } from '@/lib/utils'
 export default async function SaoKePage() {
   'use cache'
   cacheTag('sepay-history')
+  cacheLife({
+    stale: 3600, // 1 hour
+    revalidate: 86400, // 24 hours
+    expire: 604800, // 7 days
+  })
 
   const res = await fetch(`${getBaseUrl()}/api/sepay`, {
     method: 'GET',

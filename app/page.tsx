@@ -128,7 +128,11 @@ export default function HomePage() {
             </CardContent>
 
             <CardFooter>
-              <Button className='w-full' render={<Link href='/nuoi' />}>
+              <Button
+                className='w-full'
+                nativeButton={false}
+                render={<Link href='/nuoi' />}
+              >
                 Nuôi
               </Button>
             </CardFooter>
