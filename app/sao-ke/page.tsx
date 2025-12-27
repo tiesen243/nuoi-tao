@@ -6,6 +6,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -28,13 +29,18 @@ export default async function SaoKePage() {
       Authorization: `Apikey ${process.env.SEPAY_TOKEN}`,
     },
   })
-  if (!res.ok) return <main className='container flex-1 py-12'>Lỗi tải lịch sử giao dịch</main>
+  if (!res.ok)
+    return (
+      <main className='container flex-1 py-12'>Lỗi tải lịch sử giao dịch</main>
+    )
 
   const data = (await res.json()) as { history: history }
 
   return (
     <main className='flex-1 container py-12'>
-      <h1 className='mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance'>Sao kê giao dịch</h1>
+      <h1 className='mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance'>
+        Sao kê giao dịch
+      </h1>
 
       <section className='ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 px-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
         <h2 className='sr-only'>Transaction History section</h2>
@@ -46,7 +52,7 @@ export default async function SaoKePage() {
               <TableHead>Cổng thanh toán</TableHead>
               <TableHead>Số tài khoản</TableHead>
               <TableHead>Số tiền chuyển</TableHead>
-              <TableHead>Ngày giao dịch</TableHead>
+              <TableHead className='text-end'>Ngày giao dịch</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -61,7 +67,7 @@ export default async function SaoKePage() {
                     currency: 'VND',
                   })}
                 </TableCell>
-                <TableCell>
+                <TableCell className='text-end'>
                   {new Date(transaction.transactionDate).toLocaleString(
                     'vi-VN',
                   )}
@@ -69,6 +75,26 @@ export default async function SaoKePage() {
               </TableRow>
             ))}
           </TableBody>
+
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>
+                Tổng số giao dịch: {data.history.length}
+              </TableCell>
+              <TableCell colSpan={2} className='text-end'>
+                Tổng số tiền chuyển:{' '}
+                {data.history
+                  .reduce(
+                    (total, transaction) => total + transaction.transferAmount,
+                    0,
+                  )
+                  .toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}
+              </TableCell>
+            </TableRow>
+          </TableFooter>
         </Table>
       </section>
     </main>
