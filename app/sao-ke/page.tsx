@@ -28,13 +28,13 @@ export default async function SaoKePage() {
       Authorization: `Apikey ${process.env.SEPAY_TOKEN}`,
     },
   })
-  if (!res.ok) return <div>Lỗi tải lịch sử giao dịch</div>
+  if (!res.ok) return <main className='container flex-1 py-12'>Lỗi tải lịch sử giao dịch</main>
 
   const data = (await res.json()) as { history: history }
 
   return (
     <main className='flex-1 container py-12'>
-      <h1 className='text-3xl font-bold'>Sao kê giao dịch</h1>
+      <h1 className='mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance'>Sao kê giao dịch</h1>
 
       <section className='ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 px-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
         <h2 className='sr-only'>Transaction History section</h2>
