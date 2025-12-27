@@ -1,7 +1,9 @@
 import { ChevronRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
+import { Year } from '@/app/page.client'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -113,7 +115,9 @@ export default function HomePage() {
               <CardTitle className='font-serif text-primary font-bold'>
                 Nuôi Tao
               </CardTitle>
-              <CardDescription>Năm học 2025 - 2026</CardDescription>
+              <Suspense fallback={<div>Loading year...</div>}>
+                <Year />
+              </Suspense>
               <Image
                 src={person.image}
                 alt={`Portrait of ${person.name}`}
