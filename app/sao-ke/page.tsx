@@ -33,10 +33,10 @@ export default async function SaoKePage() {
   const data = (await res.json()) as { history: history }
 
   return (
-    <main className='flex-1 container py-4'>
+    <main className='flex-1 container py-12'>
       <h1 className='text-3xl font-bold'>Sao kê giao dịch</h1>
 
-      <section className='bg-card p-6 text-card-foreground rounded-xl mt-6 shadow-sm dark:border'>
+      <section className='ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 px-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
         <h2 className='sr-only'>Transaction History section</h2>
 
         <Table>
