@@ -58,7 +58,7 @@ export default function NuoiPage() {
 
         <div className='relative mx-4 aspect-3/1 w-1/3'>
           <Image
-            src='/assets/images/logo-vietinbank-insacmau.png'
+            src='/assets/logo-vietinbank-insacmau.png'
             alt='VietinBank Logo'
             className='object-cover object-left'
             fill

@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://nuoi-tao-web-tiesen.tiesen.workers.dev/sitemap.xml
