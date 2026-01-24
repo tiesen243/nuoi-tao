@@ -13,11 +13,10 @@ export const GET = async (req: NextRequest) => {
   if (apiKey !== env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  const transactions = await env.DB.prepare(`
-    SELECT id, gateway, account_number, transfer_amount, transaction_date
-    FROM transactions
-    ORDER BY datetime(transaction_date) DESC
-  `).run()
+  const transactions = await env.DB.prepare(`SELECT
+      id, gateway, account_number, transfer_amount, content, transaction_date
+      FROM transactions
+      ORDER BY datetime(transaction_date) DESC`).run()
 
   return NextResponse.json(
     {
@@ -43,8 +42,7 @@ export const POST = async (req: NextRequest) => {
       { status: 400 },
     )
 
-  await env.DB.prepare(`
-    INSERT INTO transactions (
+  await env.DB.prepare(`INSERT INTO transactions (
       id,
       gateway,
       transaction_date,
@@ -58,8 +56,7 @@ export const POST = async (req: NextRequest) => {
       reference_code,
       description
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
     .bind(
       body.id,
       body.gateway,

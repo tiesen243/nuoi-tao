@@ -60,6 +60,7 @@ export default async function SaoKePage() {
               <TableHead>Cổng thanh toán</TableHead>
               <TableHead>Số tài khoản</TableHead>
               <TableHead>Số tiền chuyển</TableHead>
+              <TableHead>Nội dung</TableHead>
               <TableHead className='text-end'>Ngày giao dịch</TableHead>
             </TableRow>
           </TableHeader>
@@ -75,6 +76,7 @@ export default async function SaoKePage() {
                     currency: 'VND',
                   })}
                 </TableCell>
+                <TableCell>{transaction.content ?? '-'}</TableCell>
                 <TableCell className='text-end'>
                   {new Date(transaction.transaction_date).toLocaleString(
                     'vi-VN',

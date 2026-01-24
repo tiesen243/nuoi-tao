@@ -18,5 +18,6 @@ export interface Transaction {
   gateway: string
   account_number: string
   transfer_amount: number
+  content: string | null
   transaction_date: string
 }
