@@ -22,18 +22,18 @@ export default function NuoiPage() {
   }, [paymentDetails])
 
   return (
-    <main className='flex-1 container grid md:grid-cols-3 gap-8 md:gap-4 py-24'>
+    <main className='container grid flex-1 gap-8 py-24 md:grid-cols-3 md:gap-4'>
       <h1 className='sr-only'>Trang Thanh Toán Nuôi Tao</h1>
 
       <section className='flex flex-col items-center gap-4'>
         <h2 className='sr-only'>Phần Hướng Dẫn Quét Mã QR</h2>
 
-        <div className='relative w-1/2 aspect-square border border-accent rounded-lg shadow-sm'>
+        <div className='relative aspect-square w-1/2 rounded-lg border border-accent shadow-sm'>
           <Image
             src={qrUrl}
             alt='QR Code'
             sizes='(max-width: 768px) 50vw, 100vw'
-            className='object-cover rounded-xl mx-auto'
+            className='mx-auto rounded-xl object-cover'
             fill
           />
         </div>
@@ -53,10 +53,10 @@ export default function NuoiPage() {
         </Button>
       </section>
 
-      <section className='ring-foreground/10 md:col-span-2 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
+      <section className='group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 md:col-span-2 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl'>
         <h2 className='sr-only'>Phần Chi Tiết Thanh Toán</h2>
 
-        <div className='w-1/3 mx-4 relative aspect-3/1'>
+        <div className='relative mx-4 aspect-3/1 w-1/3'>
           <Image
             src='/assets/images/logo-vietinbank-insacmau.png'
             alt='VietinBank Logo'

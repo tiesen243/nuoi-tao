@@ -14,16 +14,19 @@
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
     "incremental": true,
+    "types": ["./app/types.d.ts"],
     "plugins": [{ "name": "next" }],
-    "paths": { "@/*": ["./*"] }
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "alchemy.run.ts",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

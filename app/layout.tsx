@@ -2,10 +2,10 @@ import '@/app/globals.css'
 
 import type { Metadata } from 'next'
 
-import { ThemeProvider } from 'next-themes'
-import { Geist, Geist_Mono, Merriweather } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
 
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 const geistSans = Geist({
@@ -15,12 +15,6 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
-
-const merriweather = Merriweather({
-  variable: '--font-merriweather',
-  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 })
 
@@ -40,92 +34,103 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang='en' className='dark' suppressHydrationWarning>
       <body
         className={cn(
-          'font-sans antialiased min-h-dvh flex flex-col',
+          'flex min-h-dvh flex-col font-sans antialiased',
           geistSans.variable,
           geistMono.variable,
-          merriweather.variable,
         )}
       >
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          {children}
+        {children}
 
-          <footer className='bg-card text-card-foreground border-t py-12'>
-            <div className='container'>
-              <div className='grid md:grid-cols-4 gap-8 mb-8'>
-                <Link href='/' className='space-y-4'>
-                  <p className='font-bold text-lg'>Nuôi Tao</p>
-                  <p className='text-sm'>
-                    Nuôi dưỡng tài năng, phát triển tương lai (của tao).
-                  </p>
-                </Link>
+        <footer className='border-t bg-card py-12 text-card-foreground'>
+          <div className='container'>
+            <div className='mb-8 grid gap-8 md:grid-cols-4'>
+              <Link href='/' className='space-y-4'>
+                <p className='text-lg font-bold'>Nuôi Tao</p>
+                <p className='text-sm'>
+                  Nuôi dưỡng tài năng, phát triển tương lai (của tao).
+                </p>
+              </Link>
 
-                <div className='space-y-4'>
-                  <h4 className='font-semibold text-sm'>Liên kết</h4>
-                  <ul className='space-y-2 text-sm text-muted-foreground'>
-                    {['Về chúng tôi', 'Chương trình', 'Học sinh'].map(
-                      (item) => (
-                        <li key={item}>
-                          <a
-                            href='https://youtu.be/dQw4w9WgXcQ'
-                            className='hover:text-accent-foreground transition-colors'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                </div>
+              <div className='space-y-4'>
+                <h4 className='text-sm font-semibold'>Liên kết</h4>
+                <ul className='space-y-2 text-sm text-muted-foreground'>
+                  {['Về chúng tôi', 'Chương trình', 'Học sinh'].map((item) => (
+                    <li key={item}>
+                      <a
+                        href='https://youtu.be/dQw4w9WgXcQ'
+                        className='transition-colors hover:text-accent-foreground'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                <div className='space-y-4'>
-                  <h4 className='font-semibold text-sm'>Hỗ trợ</h4>
-                  <ul className='space-y-2 text-sm text-muted-foreground'>
-                    {['Câu hỏi thường gặp', 'Hỗ trợ', 'Chính sách'].map(
-                      (item) => (
-                        <li key={item}>
-                          <a
-                            href='https://youtu.be/dQw4w9WgXcQ'
-                            className='hover:text-accent-foreground transition-colors'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                </div>
-
-                <div className='space-y-4'>
-                  <h4 className='font-semibold text-sm'>Kết nối</h4>
-                  <ul className='space-y-2 text-sm text-muted-foreground'>
-                    {['Facebook', 'Instagram', 'LinkedIn'].map((item) => (
+              <div className='space-y-4'>
+                <h4 className='text-sm font-semibold'>Hỗ trợ</h4>
+                <ul className='space-y-2 text-sm text-muted-foreground'>
+                  {['Câu hỏi thường gặp', 'Hỗ trợ', 'Chính sách'].map(
+                    (item) => (
                       <li key={item}>
                         <a
                           href='https://youtu.be/dQw4w9WgXcQ'
-                          className='hover:text-accent-foreground transition-colors'
+                          className='transition-colors hover:text-accent-foreground'
                           target='_blank'
                           rel='noopener noreferrer'
                         >
                           {item}
                         </a>
                       </li>
-                    ))}
-                  </ul>
-                </div>
+                    ),
+                  )}
+                </ul>
               </div>
-              <div className='border-t pt-8 text-center text-sm text-muted-foreground'>
-                <p>&copy; 2025 Nuôi Tao. Tất cả các quyền được bảo lưu.</p>
+
+              <div className='space-y-4'>
+                <h4 className='text-sm font-semibold'>Kết nối</h4>
+                <ul className='space-y-2 text-sm text-muted-foreground'>
+                  {['Facebook', 'Instagram', 'LinkedIn'].map((item) => (
+                    <li key={item}>
+                      <a
+                        href='https://youtu.be/dQw4w9WgXcQ'
+                        className='transition-colors hover:text-accent-foreground'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </footer>
-        </ThemeProvider>
+
+            <p className='border-t pt-8 text-center text-sm text-muted-foreground'>
+              © {new Date().getFullYear()} Nuôi Tao. Được xây dựng với {'<'}4
+              bởi{' '}
+              <Button
+                variant='link'
+                nativeButton={false}
+                className='px-0'
+                render={
+                  <a
+                    href='https://tiesen.id.vn'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  />
+                }
+              >
+                tiesen243
+              </Button>
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   )

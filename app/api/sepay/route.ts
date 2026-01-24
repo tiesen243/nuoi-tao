@@ -1,69 +1,85 @@
 import type { SepayTransaction } from '@/app/api/sepay/route.data'
 import type { NextRequest } from 'next/server'
 
-import { revalidateTag } from 'next/cache'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
-import { createClient } from 'redis'
-
-const client = createClient({
-  username: process.env.REDIS_USERNAME,
-  password: process.env.REDIS_PASSWORD,
-  socket: {
-    host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT ?? '6379', 10),
-  },
-})
-
-let redisConnected = false
-async function ensureRedisConnected() {
-  if (!redisConnected) {
-    await client.connect()
-    redisConnected = true
-  }
-}
 
 export const GET = async (req: NextRequest) => {
+  const { env } = getCloudflareContext()
+
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
-  if (apiKey !== process.env.SEPAY_TOKEN)
+  if (apiKey !== env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  await ensureRedisConnected()
+  const transactions = await env.DB.prepare(`
+    SELECT id, gateway, account_number, transfer_amount, transaction_date
+    FROM transactions
+    ORDER BY datetime(transaction_date) DESC
+  `).run()
 
-  const res = await client.lRange('sepay_history', 0, -1)
-  const history = res.map((item) => JSON.parse(item))
-
-  history.sort(
-    (a, b) =>
-      new Date(b.transactionDate).getTime() -
-      new Date(a.transactionDate).getTime(),
+  return NextResponse.json(
+    {
+      message: 'Transactions retrieved successfully',
+      transactions: transactions.results,
+    },
+    { status: 200 },
   )
-
-  return NextResponse.json({ history }, { status: 200 })
 }
 
 export const POST = async (req: NextRequest) => {
+  const { env } = getCloudflareContext()
+
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
-  if (apiKey !== process.env.SEPAY_TOKEN)
+  if (apiKey !== env.SEPAY_TOKEN)
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  await ensureRedisConnected()
-
   const body = (await req.json()) as SepayTransaction
-  console.log('Received Sepay transaction:', body)
+  if (!body || !body.id)
+    return NextResponse.json(
+      { message: 'Invalid transaction data' },
+      { status: 400 },
+    )
 
-  await client.rPush(
-    'sepay_history',
-    JSON.stringify({
-      id: body.id,
-      gateway: body.gateway,
-      accountNumber: body.accountNumber.slice(0, -4) + '****',
-      transferAmount: body.transferAmount,
-      transactionDate: body.transactionDate,
-    }),
+  await env.DB.prepare(`
+    INSERT INTO transactions (
+      id,
+      gateway,
+      transaction_date,
+      account_number,
+      code,
+      content,
+      transfer_type,
+      transfer_amount,
+      accumulated,
+      sub_account,
+      reference_code,
+      description
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `)
+    .bind(
+      body.id,
+      body.gateway,
+      body.transactionDate,
+      body.accountNumber.slice(0, 4) +
+        '*'.repeat(Math.max(0, body.accountNumber.length - 4)),
+      body.code,
+      body.content,
+      body.transferType,
+      body.transferAmount,
+      body.accumulated,
+      body.subAccount,
+      body.referenceCode,
+      body.description,
+    )
+    .run()
+
+  revalidateTag('sepay-transactions', 'max')
+  return NextResponse.json(
+    { message: 'Transaction received', body },
+    { status: 200 },
   )
-
-  revalidateTag('sepay-history', 'max')
-  return NextResponse.json({ message: 'Transaction received' }, { status: 200 })
 }

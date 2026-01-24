@@ -1,6 +1,7 @@
-import type { history } from '@/app/api/sepay/route.data'
+import type { Transaction } from '@/app/api/sepay/route.data'
 
-import { cacheLife, cacheTag } from 'next/cache'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { unstable_cache } from 'next/cache'
 
 import {
   Table,
@@ -13,36 +14,43 @@ import {
 } from '@/components/ui/table'
 import { getBaseUrl } from '@/lib/utils'
 
-export default async function SaoKePage() {
-  'use cache'
-  cacheTag('sepay-history')
-  cacheLife({
-    stale: 3600, // 1 hour
-    revalidate: 86400, // 24 hours
-    expire: 604800, // 7 days
-  })
+export const dynamic = 'force-dynamic'
 
-  const res = await fetch(`${getBaseUrl()}/api/sepay`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Apikey ${process.env.SEPAY_TOKEN}`,
-    },
-  })
+const fetchData = unstable_cache(
+  () => {
+    const { env } = getCloudflareContext()
+
+    return fetch(`${getBaseUrl()}/api/sepay`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Apikey ${env.SEPAY_TOKEN}`,
+      },
+    })
+  },
+  [],
+  {
+    revalidate: 7 * 24 * 60 * 60, // Revalidate every 7 days
+    tags: ['sepay-transactions'],
+  },
+)
+
+export default async function SaoKePage() {
+  const res = await fetchData()
   if (!res.ok)
     return (
       <main className='container flex-1 py-12'>Lỗi tải lịch sử giao dịch</main>
     )
 
-  const data = (await res.json()) as { history: history }
+  const data = (await res.json()) as { transactions: Transaction[] }
 
   return (
-    <main className='flex-1 container py-12'>
+    <main className='container flex-1 py-12'>
       <h1 className='mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight text-balance'>
         Sao kê giao dịch
       </h1>
 
-      <section className='ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 px-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col'>
+      <section className='group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card px-4 py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl'>
         <h2 className='sr-only'>Transaction History section</h2>
 
         <Table>
@@ -56,19 +64,19 @@ export default async function SaoKePage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.history.map((transaction) => (
+            {data.transactions.map((transaction) => (
               <TableRow key={transaction.id}>
                 <TableCell>{transaction.id}</TableCell>
                 <TableCell>{transaction.gateway}</TableCell>
-                <TableCell>{transaction.accountNumber}</TableCell>
+                <TableCell>{transaction.account_number}</TableCell>
                 <TableCell>
-                  {transaction.transferAmount.toLocaleString('vi-VN', {
+                  {transaction.transfer_amount.toLocaleString('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
                   })}
                 </TableCell>
                 <TableCell className='text-end'>
-                  {new Date(transaction.transactionDate).toLocaleString(
+                  {new Date(transaction.transaction_date).toLocaleString(
                     'vi-VN',
                   )}
                 </TableCell>
@@ -79,13 +87,13 @@ export default async function SaoKePage() {
           <TableFooter>
             <TableRow>
               <TableCell colSpan={3}>
-                Tổng số giao dịch: {data.history.length}
+                Tổng số giao dịch: {data.transactions.length}
               </TableCell>
               <TableCell colSpan={2} className='text-end'>
                 Tổng số tiền chuyển:{' '}
-                {data.history
+                {data.transactions
                   .reduce(
-                    (total, transaction) => total + transaction.transferAmount,
+                    (total, transaction) => total + transaction.transfer_amount,
                     0,
                   )
                   .toLocaleString('vi-VN', {

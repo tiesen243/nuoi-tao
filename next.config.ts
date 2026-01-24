@@ -1,7 +1,9 @@
 import type { NextConfig } from 'next'
 
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
+
 const nextConfig = {
-  cacheComponents: true,
+  // cacheComponents: true,
   reactStrictMode: true,
   images: { unoptimized: true },
   typescript: { ignoreBuildErrors: true },
@@ -9,3 +11,5 @@ const nextConfig = {
 } satisfies NextConfig
 
 export default nextConfig
+
+initOpenNextCloudflareForDev()

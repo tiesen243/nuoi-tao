@@ -1,13 +1,18 @@
-import { clsx, type ClassValue } from 'clsx'
+import type { ClassValue } from 'clsx'
+
+import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
 export function getBaseUrl(): string {
   if (typeof window !== 'undefined') return window.location.origin
-  else if (process.env.VERCEL_PROJECT_PRODUCTION_URL)
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  else if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-  return `http://localhost:${process.env.PORT ?? 3000}`
+
+  const { env } = getCloudflareContext()
+  if (env.APP_URL) return `https://${env.APP_URL}`
+
+  return 'http://localhost:3000'
 }
