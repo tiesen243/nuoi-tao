@@ -64,7 +64,7 @@ export const POST = async (req: NextRequest) => {
       body.accountNumber.slice(0, 4) +
         '*'.repeat(Math.max(0, body.accountNumber.length - 4)),
       body.code,
-      body.content,
+      body.content.split('TKPYKN').pop()?.trim() ?? '',
       body.transferType,
       body.transferAmount,
       body.accumulated,

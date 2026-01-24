@@ -94,5 +94,5 @@ const paymentDetails = [
   { key: 'Ngân hàng', value: 'VietinBank' },
   { key: 'Chủ tài khoản', value: 'TRAN TIEN' },
   { key: 'Số tài khoản', value: '109876529294' },
-  { key: 'Nội dung chuyển khoản', value: 'SEVQR TKPYKN' },
+  { key: 'Nội dung chuyển khoản', value: 'SEVQR TKPYKN {Lời nhắn của bạn}' },
 ] as const
