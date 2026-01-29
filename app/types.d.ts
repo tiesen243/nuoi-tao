@@ -14,7 +14,3 @@ declare module 'cloudflare:workers' {
     export interface Env extends CloudflareEnv {}
   }
 }
-
-declare module '@opennextjs/cloudflare' {
-  interface CloudflareEnv extends CloudflareEnv {}
-}
