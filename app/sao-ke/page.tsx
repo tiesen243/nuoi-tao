@@ -57,8 +57,6 @@ export default async function SaoKePage() {
           <TableHeader>
             <TableRow>
               <TableHead>Mã giao dịch</TableHead>
-              <TableHead>Cổng thanh toán</TableHead>
-              <TableHead>Số tài khoản</TableHead>
               <TableHead>Số tiền chuyển</TableHead>
               <TableHead>Nội dung</TableHead>
               <TableHead className='text-end'>Ngày giao dịch</TableHead>
@@ -68,8 +66,6 @@ export default async function SaoKePage() {
             {data.transactions.map((transaction) => (
               <TableRow key={transaction.id}>
                 <TableCell>{transaction.id}</TableCell>
-                <TableCell>{transaction.gateway}</TableCell>
-                <TableCell>{transaction.account_number}</TableCell>
                 <TableCell>
                   {transaction.transfer_amount.toLocaleString('vi-VN', {
                     style: 'currency',

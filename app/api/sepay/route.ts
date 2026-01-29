@@ -61,8 +61,7 @@ export const POST = async (req: NextRequest) => {
       body.id,
       body.gateway,
       body.transactionDate,
-      body.accountNumber.slice(0, 4) +
-        '*'.repeat(Math.max(0, body.accountNumber.length - 4)),
+      body.accountNumber,
       body.code,
       body.content.split('TKPYKN').pop()?.trim() ?? '',
       body.transferType,
