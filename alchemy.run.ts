@@ -4,7 +4,7 @@ import { Nextjs, D1Database } from 'alchemy/cloudflare'
 const app = await alchemy('nuoi-tao')
 
 export const db = await D1Database('db', {
-  name: 'nuoi-tao-db',
+  adopt: true,
   migrationsDir: './migrations',
 })
 
