@@ -1,4 +1,3 @@
-import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { unstable_cache } from 'next/cache'
 
 import type { Transaction } from '@/app/api/sepay/route.data'
@@ -17,17 +16,14 @@ import { getBaseUrl } from '@/lib/utils'
 export const dynamic = 'force-dynamic'
 
 const fetchData = unstable_cache(
-  () => {
-    const { env } = getCloudflareContext()
-
-    return fetch(`${getBaseUrl()}/api/sepay`, {
+  () =>
+    fetch(`${getBaseUrl()}/api/sepay`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Apikey ${env.SEPAY_TOKEN}`,
+        Authorization: `Apikey ${process.env.SEPAY_TOKEN}`,
       },
-    })
-  },
+    }),
   [],
   {
     revalidate: 7 * 24 * 60 * 60, // Revalidate every 7 days

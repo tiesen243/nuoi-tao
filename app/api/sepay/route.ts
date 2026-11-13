@@ -1,13 +1,13 @@
 import type { NextRequest } from 'next/server'
 
 import { getCloudflareContext } from '@opennextjs/cloudflare'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 import type { SepayTransaction } from '@/app/api/sepay/route.data'
 
 export const GET = async (req: NextRequest) => {
-  const { env } = getCloudflareContext()
+  const { env } = await getCloudflareContext({ async: true })
 
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
@@ -29,7 +29,7 @@ export const GET = async (req: NextRequest) => {
 }
 
 export const POST = async (req: NextRequest) => {
-  const { env } = getCloudflareContext()
+  const { env } = await getCloudflareContext({ async: true })
 
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.split(' ')[1]
