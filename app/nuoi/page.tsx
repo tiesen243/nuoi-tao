@@ -1,25 +1,27 @@
+'use client'
+
 import { DownloadIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 
 export default function NuoiPage() {
+  const [message, setMessage] = useState('')
+
   const qrUrl = useMemo(() => {
     const acc = encodeURIComponent(
-      paymentDetails.find((item) => item.key === 'Số tài khoản')?.value ?? '',
+      paymentDetails.find((item) => item.key === 'Số tài khoản')?.value ?? ''
     )
     const bank = encodeURIComponent(
-      paymentDetails.find((item) => item.key === 'Ngân hàng')?.value ?? '',
+      paymentDetails.find((item) => item.key === 'Ngân hàng')?.value ?? ''
     )
-    const des = encodeURIComponent(
-      paymentDetails.find((item) => item.key === 'Nội dung chuyển khoản')
-        ?.value ?? '',
-    )
+    const des = encodeURIComponent(`SEVQR TKPYKN ${message.trim()}`)
 
     return `https://qr.sepay.vn/img?acc=${acc}&bank=${bank}&des=${des}`
-  }, [paymentDetails])
+  }, [message])
 
   return (
     <main className='container grid flex-1 gap-8 py-24 md:grid-cols-3 md:gap-4'>
@@ -34,6 +36,7 @@ export default function NuoiPage() {
             alt='QR Code'
             sizes='(max-width: 768px) 50vw, 100vw'
             className='mx-auto rounded-xl object-cover'
+            unoptimized
             fill
           />
         </div>
@@ -77,6 +80,24 @@ export default function NuoiPage() {
               <span className='font-mono'>{value}</span>
             </div>
           ))}
+
+          <div className='flex flex-col gap-2 pt-4'>
+            <label htmlFor='donation-message' className='font-medium'>
+              Lời nhắn của bạn
+            </label>
+
+            <Input
+              id='donation-message'
+              placeholder='Nhập lời nhắn...'
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              maxLength={50}
+            />
+
+            <p className='text-xs text-muted-foreground'>
+              Lời nhắn sẽ được tự động thêm vào nội dung chuyển khoản.
+            </p>
+          </div>
         </CardHeader>
 
         <CardFooter className='flex justify-between border-t'>
@@ -94,5 +115,4 @@ const paymentDetails = [
   { key: 'Ngân hàng', value: 'VietinBank' },
   { key: 'Chủ tài khoản', value: 'TRAN TIEN' },
   { key: 'Số tài khoản', value: '109876529294' },
-  { key: 'Nội dung chuyển khoản', value: 'SEVQR TKPYKN {Lời nhắn của bạn}' },
 ] as const

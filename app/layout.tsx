@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn, getBaseUrl } from '@/lib/utils'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   description,
   openGraph: {
     images: `https://tiesen.id.vn/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`,
-    url: 'https://nuoi-tao.vercel.app',
+    url: getBaseUrl(),
   },
-  alternates: { canonical: 'https://nuoi-tao.vercel.app' },
+  alternates: { canonical: getBaseUrl() },
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         className={cn(
           'flex min-h-dvh flex-col font-sans antialiased',
           geistSans.variable,
-          geistMono.variable,
+          geistMono.variable
         )}
       >
         {children}
@@ -87,7 +87,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                           {item}
                         </a>
                       </li>
-                    ),
+                    )
                   )}
                 </ul>
               </div>

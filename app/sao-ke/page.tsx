@@ -1,7 +1,7 @@
-import type { Transaction } from '@/app/api/sepay/route.data'
-
 import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { unstable_cache } from 'next/cache'
+
+import type { Transaction } from '@/app/api/sepay/route.data'
 
 import {
   Table,
@@ -32,7 +32,7 @@ const fetchData = unstable_cache(
   {
     revalidate: 7 * 24 * 60 * 60, // Revalidate every 7 days
     tags: ['sepay-transactions'],
-  },
+  }
 )
 
 export default async function SaoKePage() {
@@ -75,7 +75,7 @@ export default async function SaoKePage() {
                 <TableCell>{transaction.content ?? '-'}</TableCell>
                 <TableCell className='text-end'>
                   {new Date(transaction.transaction_date).toLocaleString(
-                    'vi-VN',
+                    'vi-VN'
                   )}
                 </TableCell>
               </TableRow>
@@ -92,7 +92,7 @@ export default async function SaoKePage() {
                 {data.transactions
                   .reduce(
                     (total, transaction) => total + transaction.transfer_amount,
-                    0,
+                    0
                   )
                   .toLocaleString('vi-VN', {
                     style: 'currency',

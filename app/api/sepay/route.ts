@@ -1,9 +1,10 @@
-import type { SepayTransaction } from '@/app/api/sepay/route.data'
 import type { NextRequest } from 'next/server'
 
 import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
+
+import type { SepayTransaction } from '@/app/api/sepay/route.data'
 
 export const GET = async (req: NextRequest) => {
   const { env } = getCloudflareContext()
@@ -23,7 +24,7 @@ export const GET = async (req: NextRequest) => {
       message: 'Transactions retrieved successfully',
       transactions: transactions.results,
     },
-    { status: 200 },
+    { status: 200 }
   )
 }
 
@@ -39,7 +40,7 @@ export const POST = async (req: NextRequest) => {
   if (!body || !body.id)
     return NextResponse.json(
       { message: 'Invalid transaction data' },
-      { status: 400 },
+      { status: 400 }
     )
 
   await env.DB.prepare(`INSERT INTO transactions (
@@ -69,13 +70,13 @@ export const POST = async (req: NextRequest) => {
       body.accumulated,
       body.subAccount,
       body.referenceCode,
-      body.description,
+      body.description
     )
     .run()
 
   revalidateTag('sepay-transactions', 'max')
   return NextResponse.json(
     { message: 'Transaction received', body },
-    { status: 200 },
+    { status: 200 }
   )
 }
