@@ -84,7 +84,7 @@ export default async function SaoKePage() {
                 Tổng số giao dịch: {data.transactions.length}
               </TableCell>
               <TableCell colSpan={2} className='text-end'>
-                Tổng số tiền chuyển:{' '}
+                Tổng số tiền đã biển thủ:{' '}
                 {data.transactions
                   .reduce(
                     (total, transaction) => total + transaction.transfer_amount,
