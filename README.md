@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nuôi Tao
 
-## Getting Started
+Nuôi Tao là một chương trình kết nối những người muốn hỗ trợ tài chính với những người đang gặp khó khăn trong việc tiếp tục học tập và phát triển bản thân.
 
-First, run the development server:
+Đây là ứng dụng web được xây dựng bằng Next.js, React, Tailwind CSS và TypeScript. Ứng dụng cung cấp trang giới thiệu chương trình, danh sách người cần hỗ trợ, trang đăng ký tài trợ và trang sao kê.
+
+## Bắt đầu
+
+Cài đặt dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Khởi chạy development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Mở [http://localhost:3000](http://localhost:3000) trong trình duyệt.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `bun run dev` - Khởi chạy development server.
+- `bun run build` - Tạo production build.
+- `bun run start` - Chạy production server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Có thể dùng `npm` hoặc `pnpm` thay cho `bun` nếu cần.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Cấu trúc chính
 
-## Deploy on Vercel
+- `app/` - Các route và giao diện Next.js.
+- `components/` - Các component giao diện dùng chung.
+- `lib/` - Nội dung và tiện ích dùng chung.
+- `migrations/` - Database migrations.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dự án được phát hành theo [MIT License](./LICENSE).
